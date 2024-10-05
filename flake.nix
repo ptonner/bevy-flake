@@ -29,6 +29,8 @@
             (rust-bin.stable.latest.default.override { targets = [ "wasm32-unknown-unknown" ]; })
           ];
           buildInputs = with pkgs; [
+            simple-http-server
+            wasm-bindgen-cli
             trunk
             udev
             alsa-lib
