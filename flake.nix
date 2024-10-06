@@ -89,6 +89,25 @@
           '';
           installPhase = "echo 'Skipping installPhase'";
         };
+        packages.site =
+          let
+            web = self.packages.${system}.web;
+          in
+          pkgs.stdenv.mkDerivation {
+            inherit version;
+            buildInputs = [
+              web
+              pkgs.zip
+            ];
+            pname = pname + "-site";
+            src = ./web;
+            installPhase = ''
+              cp -r . $out
+              cp ${web}/src/* $out
+              cd $out
+              zip site *
+            '';
+          };
         devShells.default = pkgs.mkShell rec {
           inherit nativeBuildInputs;
           buildInputs = webBuildInputs;

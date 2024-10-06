@@ -3,7 +3,7 @@ cross-platform (native + web) projects with the Bevy game engine.
 * Roadmap
 - [X] fix web build (missing ~wasm-bindgen~??)
 - [ ] build and test a web upload for ~itch.io~
-- [ ] build a static site from the web build
+- [ ] add build and publish steps with github actions
 * Usage
 ** Develop
 #+begin_src sh
@@ -18,6 +18,11 @@ cross-platform (native + web) projects with the Bevy game engine.
 #+begin_src sh
   nix run
 #+end_src
+** Publish (web)
+#+begin_src sh
+  nix build .#site # this takes a while...
+#+end_src
+Upload the generated ~result/site.zip~ to ~itch.io~ (untested)
 * References
 - [[https://github.com/jkaye2012/flake-templates/tree/main/rust-wasm-project-template][buildRustPackage]]
 - [[https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/][Building Rust WASM projects with Nix | Tom Houle's homepage]]
