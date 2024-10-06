@@ -1,0 +1,20 @@
+A proof of concept reproducible build and development environment for
+cross-platform (native + web) projects with the Bevy game engine.
+* Develop
+#+begin_src sh
+  nix develop
+#+end_src
+* Build
+#+begin_src sh
+  nix build # native
+  nix build .#web # web
+#+end_src
+* Run
+#+begin_src sh
+  nix run
+#+end_src
+* References
+- [[https://github.com/jkaye2012/flake-templates/tree/main/rust-wasm-project-template][buildRustPackage]]
+- [[https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/][Building Rust WASM projects with Nix | Tom Houle's homepage]]
+- [[https://github.com/samdroid-apps/nix-articles/blob/master/04-proper-mkderivation.md][nix-articles/04-proper-mkderivation.md at master · samdroid-apps/nix-articles · GitHub]]
+- [[https://github.com/jkaye2012/flake-templates/tree/main/rust-wasm-project-template][flake-templates/rust-wasm-project-template at main · jkaye2012/flake-templates · GitHub]]

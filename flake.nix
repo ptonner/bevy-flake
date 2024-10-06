@@ -31,9 +31,6 @@
           (rust-bin.stable.latest.default.override { targets = [ "wasm32-unknown-unknown" ]; })
         ];
         buildInputs = with pkgs; [
-          simple-http-server
-          wasm-bindgen-cli
-          trunk
           udev
           alsa-lib
           vulkan-loader
@@ -43,17 +40,56 @@
           xorg.libXrandr # To use the x11 feature
           libxkbcommon
         ];
+        webBuildInputs = builtins.concatLists [
+          (with pkgs; [
+            simple-http-server
+            wasm-bindgen-cli
+            trunk
+          ])
+          buildInputs
+        ];
+        version = "0.1";
+        pname = "bevy-flake";
       in
       {
-        packages.default = rustPlatform.buildRustPackage rec {
-          inherit nativeBuildInputs buildInputs;
-          pname = "bevy-flake";
-          version = "0.1";
+        packages.default = rustPlatform.buildRustPackage {
+          inherit
+            nativeBuildInputs
+            buildInputs
+            version
+            pname
+            ;
           src = ./.;
-          cargoHash = "sha256-vu0/lbWuZnb7wryOqjH9VqEaE3z3AqbCSwRMuCitX8c=";
+          cargoLock = {
+            lockFile = ./Cargo.lock;
+          };
+          LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
+        };
+        packages.web = rustPlatform.buildRustPackage {
+          inherit nativeBuildInputs version;
+          buildInputs = webBuildInputs;
+          pname = pname + "-web";
+          src = ./.;
+          cargoLock = {
+            lockFile = ./Cargo.lock;
+          };
+          buildPhase = ''
+            cargo build --release --target=wasm32-unknown-unknown
+
+            echo 'Creating out dir...'
+            mkdir -p $out/src;
+
+            echo 'Generating node module...'
+            wasm-bindgen \
+              --target web \
+              --out-dir $out/src \
+              target/wasm32-unknown-unknown/release/bevy-flake.wasm;
+          '';
+          installPhase = "echo 'Skipping installPhase'";
         };
         devShells.default = pkgs.mkShell rec {
-          inherit nativeBuildInputs buildInputs;
+          inherit nativeBuildInputs;
+          buildInputs = webBuildInputs;
           LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
         };
       }
