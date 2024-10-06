@@ -82,6 +82,7 @@
 
             echo 'Generating node module...'
             wasm-bindgen \
+              --out-name wasm \
               --target web \
               --out-dir $out/src \
               target/wasm32-unknown-unknown/release/bevy-flake.wasm;
