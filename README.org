@@ -1,7 +1,7 @@
 A proof of concept reproducible build and development environment for
 cross-platform (native + web) projects with the Bevy game engine.
 * Roadmap
-- [ ] fix web build (missing ~wasm-bindgen~??)
+- [X] fix web build (missing ~wasm-bindgen~??)
 - [ ] build and test a web upload for ~itch.io~
 - [ ] build a static site from the web build
 * Usage
@@ -23,3 +23,4 @@ cross-platform (native + web) projects with the Bevy game engine.
 - [[https://www.tomhoule.com/2021/building-rust-wasm-with-nix-flakes/][Building Rust WASM projects with Nix | Tom Houle's homepage]]
 - [[https://github.com/samdroid-apps/nix-articles/blob/master/04-proper-mkderivation.md][nix-articles/04-proper-mkderivation.md at master · samdroid-apps/nix-articles · GitHub]]
 - [[https://github.com/jkaye2012/flake-templates/tree/main/rust-wasm-project-template][flake-templates/rust-wasm-project-template at main · jkaye2012/flake-templates · GitHub]]
+- [[https://itch.io/docs/creators/html5][Uploading HTML5 games - itch.io]]

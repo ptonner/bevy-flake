@@ -29,6 +29,7 @@
         nativeBuildInputs = with pkgs; [
           pkg-config
           (rust-bin.stable.latest.default.override { targets = [ "wasm32-unknown-unknown" ]; })
+          wasm-bindgen-cli
         ];
         buildInputs = with pkgs; [
           udev
