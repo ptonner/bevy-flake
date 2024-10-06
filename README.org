@@ -1,15 +1,20 @@
 A proof of concept reproducible build and development environment for
 cross-platform (native + web) projects with the Bevy game engine.
-* Develop
+* Roadmap
+- [ ] fix web build (missing ~wasm-bindgen~??)
+- [ ] build and test a web upload for ~itch.io~
+- [ ] build a static site from the web build
+* Usage
+** Develop
 #+begin_src sh
   nix develop
 #+end_src
-* Build
+** Build
 #+begin_src sh
   nix build # native
   nix build .#web # web
 #+end_src
-* Run
+** Run
 #+begin_src sh
   nix run
 #+end_src
